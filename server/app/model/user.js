@@ -3,7 +3,7 @@ module.exports = (app) => {
   const Schema = mongoose.Schema;
 
   const UserSchema = new Schema({
-    id: { type: Number, select: false },
+    id: { type: String, select: false },
     username: { type: String, required: true },
     password: { type: String, required: true },
   });

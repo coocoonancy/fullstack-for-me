@@ -37,5 +37,8 @@ module.exports = (appInfo) => {
         options: {},
       },
     },
+    jwt: {
+      secret: "gy2022@16",
+    },
   };
 };
