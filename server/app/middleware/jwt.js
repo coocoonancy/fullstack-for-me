@@ -12,18 +12,18 @@ module.exports = ({ app }) => {
     try {
       const res = await jwt.verify(token, app.config.secret);
       ctx.state.userid = res.id;
-      ctx.state.username = ret.username;
+      ctx.state.username = res.username;
       await next();
     } catch (err) {
       if (err.name === "TokenExpiredError") {
         ctx.body = {
-          status: -1,
-          message: "用户信息出错",
+          status: -666,
+          message: "登录过期",
         };
       } else {
         ctx.body = {
-          status: -666,
-          message: "登录过期",
+          status: -1,
+          message: "用户信息出错",
         };
       }
     }
