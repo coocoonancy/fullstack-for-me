@@ -43,7 +43,9 @@ module.exports = (appInfo) => {
     mongoose: {
       client: {
         url: "mongodb://127.0.0.1:27017/nancy",
-        options: {},
+        options: {
+          useUnifiedTopology: true,
+        },
       },
     },
     jwt: {

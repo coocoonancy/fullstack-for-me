@@ -2,6 +2,7 @@
 
 const svgCaptcha = require("svg-captcha");
 const BaseController = require("./base");
+const fse = require("fs-extra");
 class UtilController extends BaseController {
   async captcha() {
     const { ctx } = this;
@@ -10,6 +11,17 @@ class UtilController extends BaseController {
     ctx.session.captcha = captcha.text;
     ctx.response.type = "image/svg+xml";
     ctx.body = captcha.data;
+  }
+  async uploadfile() {
+    const { ctx } = this;
+    const file = ctx.request.files[0];
+    const { name } = ctx.request.body;
+    console.log(name, file);
+    // 将文件移到public
+    await fse.move(file.filepath, this.config.UPLOAD_DIR + "/" + file.filename);
+    this.success({
+      url: "/pubilc" + file.filename,
+    });
   }
   async sendcode() {
     const { ctx } = this;
